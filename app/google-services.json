@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "220822618265",
+    "project_id": "justfindadm",
+    "storage_bucket": "justfindadm.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:220822618265:android:60092991ceab4401b67808",
+        "android_client_info": {
+          "package_name": "com.example.justfindadm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "220822618265-o1opupf0bo2lqjifuii2b3u3kgoqpk7m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.justfindadm",
+            "certificate_hash": "e31594129de7096ec4248a46ea262e09abec59a9"
+          }
+        },
+        {
+          "client_id": "220822618265-jouj8tpo43sb01qcdu6jeb60b9rp5dnf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCRrvXGPjogPaw_ODOH9YUB6KJ8zc2VP88"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "220822618265-jouj8tpo43sb01qcdu6jeb60b9rp5dnf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
