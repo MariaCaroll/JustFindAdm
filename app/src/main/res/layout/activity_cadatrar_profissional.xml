@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".atividades.CadatrarProfissionalActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/imgCadastro"
+            android:layout_width="87dp"
+            android:layout_height="86dp"
+            android:layout_gravity="center"
+            android:textAlignment="center"
+            app:srcCompat="@drawable/padrao" />
+
+        <EditText
+            android:id="@+id/editTextDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="date" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Informações Pessoais"
+            android:layout_marginTop="5dp"/>
+
+        <EditText
+            android:id="@+id/edtCriarNome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Nome"
+            android:inputType="textPersonName"
+            android:background="@drawable/bg_edit_text"
+            android:layout_marginTop="2dp"/>
+
+        <EditText
+            android:id="@+id/edtCriarSobrenome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Sobrenome"
+            android:inputType="textPersonName"
+            android:background="@drawable/bg_edit_text"
+            android:layout_marginTop="5dp"/>
+
+        <EditText
+            android:id="@+id/edtCriaNomeFantasia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Nome Fantasia"
+            android:inputType="textPersonName"
+            android:background="@drawable/bg_edit_text"
+            android:layout_marginTop="5dp"/>
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Contato"
+            android:layout_marginTop="5dp"/>
+
+        <com.santalu.maskara.widget.MaskEditText
+            android:id="@+id/edtCriarCelular"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Celular"
+            android:inputType="phone"
+            app:mask="(##) #####-####"
+            android:background="@drawable/bg_edit_text"
+            android:layout_marginTop="2dp"/>
+
+        <com.santalu.maskara.widget.MaskEditText
+            android:id="@+id/edtCriarWhats"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="WhatsApp"
+            android:inputType="phone"
+            app:mask="(##) #####-####"
+            android:background="@drawable/bg_edit_text"
+            android:layout_marginTop="5dp"/>
+
+        <EditText
+            android:id="@+id/edtCriarEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="E-mail"
+            android:inputType="textEmailAddress"
+            android:background="@drawable/bg_edit_text"
+            android:layout_marginTop="5dp"/>
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Endereço"
+            android:layout_marginTop="5dp"/>
+
+        <Spinner
+            android:id="@+id/spnCriarCep"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_edit_text"
+            android:layout_marginTop="2dp"/>
+
+        <com.santalu.maskara.widget.MaskEditText
+            android:id="@+id/edtCriarCep"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="CEP"
+            android:inputType="textPersonName"
+            app:mask="##.###-###"
+            android:background="@drawable/bg_edit_text"
+            android:layout_marginTop="5dp"/>
+
+        <EditText
+            android:id="@+id/edtCriarCidade"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Cidade"
+            android:inputType="textPersonName"
+            android:background="@drawable/bg_edit_text"
+            android:layout_marginTop="5dp"/>
+
+        <EditText
+            android:id="@+id/edtCriarBairro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Bairro"
+            android:inputType="textPersonName"
+            android:background="@drawable/bg_edit_text"
+            android:layout_marginTop="5dp"/>
+
+        <EditText
+            android:id="@+id/edtCriarLogradouro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Logradouro"
+            android:inputType="textPersonName"
+            android:background="@drawable/bg_edit_text"
+            android:layout_marginTop="5dp"/>
+
+        <EditText
+            android:id="@+id/edtCriarComplemento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Complemento"
+            android:inputType="textPersonName"
+            android:background="@drawable/bg_edit_text"
+            android:layout_marginTop="5dp"/>
+
+        <EditText
+            android:id="@+id/edtCriarNumero"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Número"
+            android:inputType="textPersonName"
+            android:background="@drawable/bg_edit_text"
+            android:layout_marginTop="5dp"/>
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Valores"
+            android:layout_marginTop="5dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Min." />
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Max." />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <com.blackcat.currencyedittext.CurrencyEditText
+                android:id="@+id/edtCriarValorMinimo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:inputType="numberDecimal"
+                android:background="@drawable/bg_edit_text"
+                android:layout_marginTop="5dp"/>
+
+            <com.blackcat.currencyedittext.CurrencyEditText
+                android:id="@+id/edtCriarValorMaximo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:inputType="numberDecimal"
+                android:background="@drawable/bg_edit_text"
+                android:layout_marginTop="5dp"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tipo de Profissional"
+            android:layout_marginTop="5dp"/>
+
+        <Spinner
+            android:id="@+id/spnCriarTipo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_edit_text"
+            android:layout_marginTop="2dp"/>
+
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Modo de Atender"
+            android:background="@drawable/bg_edit_text"
+            android:layout_marginTop="5dp"/>
+
+        <Spinner
+            android:id="@+id/spnCriaModoAtender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_edit_text"
+            android:layout_marginTop="2dp"/>
+
+        <TextView
+            android:id="@+id/textView14"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Apresentação"
+            android:layout_marginTop="5dp"/>
+
+        <EditText
+            android:id="@+id/edtCiarApresentacao"
+            android:layout_width="match_parent"
+            android:layout_height="159dp"
+            android:ems="10"
+            android:gravity="start|top"
+            android:hint="Descrever  o trabalho."
+            android:inputType="textMultiLine"
+            android:background="@drawable/bg_edit_text"
+            android:layout_marginTop="2dp"/>
+
+        <Button
+            android:id="@+id/btnCadastrarProfissional"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cadastrar"
+            android:layout_marginTop="5dp"
+            android:theme="@style/botaoPadrao"/>
+
+    </LinearLayout>
+</ScrollView>

@@ -58,7 +58,7 @@ public class ProfissionalActivity extends AppCompatActivity {
                 invalidateOptionsMenu();
                 break;
             case R.id.menu_profissionais:
-
+                startActivity(new Intent(getApplicationContext(), ListarProfissionalActivity.class));
                 break;
         }
         return super.onOptionsItemSelected(item);

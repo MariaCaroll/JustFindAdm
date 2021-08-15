@@ -9,10 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.JustFindAdm">
+        <activity android:name=".atividades.CadatrarProfissionalActivity"></activity>
         <activity
-            android:name=".atividades.CadastroProfissionalActivity"
+            android:name=".atividades.ListarProfissionalActivity"
             android:label="@string/title_activity_cadastro_profissional"
-            android:theme="@style/Theme.JustFindAdm.NoActionBar"></activity>
+            android:theme="@style/Theme.JustFindAdm.NoActionBar" />
         <activity android:name=".atividades.CadastroActivity" />
         <activity android:name=".atividades.ProfissionalActivity">
             <intent-filter>
