@@ -105,7 +105,7 @@ public class CadatrarProfissionalActivity extends AppCompatActivity {
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Permissões negadas");
-        builder.setMessage("Para ultizar o app e necessário aceitar as permissões!");
+        builder.setMessage("Para ultizar o app e necessáriso aceitar as permissões!");
         builder.setCancelable(false);
         builder.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
             @Override
