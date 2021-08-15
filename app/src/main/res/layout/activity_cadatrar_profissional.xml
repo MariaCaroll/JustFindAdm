@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradiente_bk"
     tools:context=".atividades.CadatrarProfissionalActivity">
 
     <LinearLayout
@@ -42,6 +43,7 @@
             android:hint="Nome"
             android:inputType="textPersonName"
             android:background="@drawable/bg_edit_text"
+
             android:layout_marginTop="2dp"/>
 
         <EditText
@@ -110,23 +112,51 @@
             android:text="Endereço"
             android:layout_marginTop="5dp"/>
 
-        <Spinner
-            android:id="@+id/spnCriarUF"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bg_edit_text"
-            android:layout_marginTop="2dp"/>
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
-        <com.santalu.maskara.widget.MaskEditText
-            android:id="@+id/edtCriarCep"
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Estado" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="CEP" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="CEP"
-            android:inputType="textPersonName"
-            app:mask="##.###-###"
-            android:background="@drawable/bg_edit_text"
-            android:layout_marginTop="5dp"/>
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Spinner
+                android:id="@+id/spnCriarUF"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_edit_text"
+                android:entries="@array/estados" />
+
+            <com.santalu.maskara.widget.MaskEditText
+                android:id="@+id/edtCriarCep"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_edit_text"
+                android:ems="10"
+                android:inputType="textPersonName"
+                app:mask="##.###-###" />
+        </LinearLayout>
 
         <EditText
             android:id="@+id/edtCriarCidade"
@@ -229,36 +259,55 @@
                 android:inputType="numberDecimal"
                 android:background="@drawable/bg_edit_text"
                 android:layout_marginTop="5dp"/>
+
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/textView12"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Tipo de Profissional"
-            android:layout_marginTop="5dp"/>
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal">
 
-        <Spinner
-            android:id="@+id/spnCriarTipo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bg_edit_text"
-            android:layout_marginTop="2dp"/>
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:text="Tipo de Profissional" />
 
-        <TextView
-            android:id="@+id/textView13"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Modo de Atender"
-            android:background="@drawable/bg_edit_text"
-            android:layout_marginTop="5dp"/>
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:text="Modo de Atender" />
+        </LinearLayout>
 
-        <Spinner
-            android:id="@+id/spnCriaModoAtender"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bg_edit_text"
-            android:layout_marginTop="2dp"/>
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Spinner
+                android:id="@+id/spnCriarTipo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_edit_text"
+                android:entries="@array/profissao" />
+
+            <Spinner
+                android:id="@+id/spnCriaModoAtender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_edit_text"
+                android:entries="@array/modoAtender" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/textView14"
@@ -283,7 +332,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:onClick="salvarProfissional"
+            android:onClick="validarDados"
             android:text="Cadastrar"
             android:theme="@style/botaoPadrao" />
 

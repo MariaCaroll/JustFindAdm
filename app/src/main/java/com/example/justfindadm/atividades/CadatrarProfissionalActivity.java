@@ -20,10 +20,20 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.blackcat.currencyedittext.CurrencyEditText;
 import com.example.justfindadm.R;
+import com.example.justfindadm.helper.ConfigurarFirebase;
+import com.example.justfindadm.helper.DateUtil;
 import com.example.justfindadm.helper.Permissoes;
+import com.example.justfindadm.model.Profissional;
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.santalu.maskara.widget.MaskEditText;
 
 import java.util.ArrayList;
@@ -41,36 +51,198 @@ public class CadatrarProfissionalActivity extends AppCompatActivity implements V
     private CurrencyEditText campoValorMin, campoValorMax;
     private MaskEditText campoCelular, campoWhats, campoCep;
     private Button btnCadastrar;
-
+    private StorageReference storage;
     //permissoes
-    private String[] permissoes = new String[]{
-            Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.CAMERA,
-        };
-
+    private String[] permissoes = new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.CAMERA,};
     //fotos recuperadas
     private List<String> listaFotoRecuperada = new ArrayList<>();
+    private List<String> listaURLFotos = new ArrayList<>();
+    //Chamado a classe de profissionais
+    private Profissional prof;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadatrar_profissional);
+        storage = ConfigurarFirebase.getFirebaseStorage();
         //validar permissoes
         Permissoes.validarPermissoes(permissoes, this, 1);
 
         inicializar();
     }
-    //Pega o que foi digiado e salva no firebase
-    private void salvarProfissional(View view)
+    //Salvar a profissional
+    private void salvarProfissional()
     {
+        /**
+         * Salvar imagem no Storage
+         */
+        for (int i = 0; i < listaFotoRecuperada.size(); i++)
+        {
+            String urlImagem = listaFotoRecuperada.get(i);
+            int tamanhoLista = listaFotoRecuperada.size();
+            salvarFotoStorage(urlImagem, tamanhoLista, i);
+        }
 
-
-
-        long maximo = campoValorMax.getRawValue();
-        long minimo = campoValorMin.getRawValue();
-        String celular = campoCelular.getText().toString();
-        String whats = campoWhats.getText().toString();
     }
+    private  void salvarFotoStorage(String urlString, final int totalFotos, int contador)
+    {
+        //cria nó no storage
+        final StorageReference imagemProf = storage.child("imagens")
+                .child("profissionais")
+                .child(prof.getIdProfissional())
+                .child("imagens" + contador);
+
+        //fazer o uplode da img
+        UploadTask uploadTask = imagemProf.putFile(Uri.parse(urlString));
+        uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+            @Override
+            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                if (!task.isSuccessful()) {
+                    throw task.getException();
+                }
+
+                return imagemProf.getDownloadUrl();
+            }
+        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+            @Override
+            public void onComplete(@NonNull Task<Uri> task) {
+                if (task.isSuccessful()) {
+                    Uri url = task.getResult();
+                    listaURLFotos.add(url.toString());
+                    if(totalFotos == listaURLFotos.size()) {
+                        prof.setFotos(listaURLFotos);
+                        prof.salvar();
+                        //dialog.dismiss();
+                        //dialog.hide();
+                    }
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                exibirMensagemErro("Falha ao fazer Upload");
+            }
+        });
+
+    }
+
+    public Profissional configuraProf()
+    {
+        prof = new Profissional();
+        prof.setNome(campoNome.getText().toString());
+        prof.setSobrenome(campoSobrenome.getText().toString());
+        prof.setNomeFantasia(campoNomeFantasia.getText().toString());
+        prof.setEmail(campoEmail.getText().toString());
+        prof.setBairro(campoBairro.getText().toString());
+        prof.setLogradouro(campoLogradouro.getText().toString());
+        prof.setNumero(campoNumero.getText().toString());
+        prof.setModo(campoModo.getSelectedItem().toString());
+        prof.setApresentacao(campoApresentacao.getText().toString());
+        prof.setMaximo(String.valueOf(campoValorMax.getRawValue()));
+        prof.setMinimo(String.valueOf(campoValorMin.getRawValue()));
+        prof.setCelular(campoCelular.getText().toString());
+        prof.setWhats(campoWhats.getText().toString());
+        prof.setCep(campoCep.getText().toString());
+        prof.setData(campoDataAtual.getText().toString());
+
+        //facilitar para o filtro
+        String tipoProfissional = campoTipo.getSelectedItem().toString();
+        prof.setTipo(tipoProfissional);
+        String estado = campoEstado.getSelectedItem().toString();
+        prof.setEstado(estado);
+        String cidade = campoCidade.getText().toString();
+        prof.setCidade(cidade);
+
+        return prof;
+    }
+    public void validarDados(View view)
+    {
+        prof = configuraProf();
+        if(listaFotoRecuperada.size() != 0)
+        {
+            if(!prof.getNome().isEmpty()){
+                if(!prof.getSobrenome().isEmpty()) {
+                    if(!prof.getNomeFantasia().isEmpty()){
+                        if(!prof.getEmail().isEmpty()){
+                            if(!prof.getEstado().isEmpty()){
+                                if(!prof.getBairro().isEmpty()){
+                                    if(!prof.getLogradouro().isEmpty()){
+                                        if(!prof.getNumero().isEmpty()){
+                                            if(!prof.getTipo().equals("selecione") ){
+                                                if(!prof.getModo().equals("selecione")){
+                                                    if(!prof.getApresentacao().isEmpty()){
+                                                        if(!prof.getEstado().equals("selecione")){
+                                                            if(!prof.getMaximo().isEmpty() && !prof.getMaximo().equals("0")){
+                                                                if(!prof.getMinimo().isEmpty() && !prof.getMinimo().equals("0")){
+                                                                    if(!prof.getCelular().isEmpty()){
+                                                                        if(!prof.getWhats().isEmpty()){
+                                                                            if(!prof.getCep().isEmpty()){
+                                                                                //salvar a profissional
+                                                                                salvarProfissional();
+                                                                            }else{
+                                                                                exibirMensagemErro("Preencha o Cep");
+                                                                            }
+                                                                        }else{
+                                                                            exibirMensagemErro("Preencha o WhatsApp");
+                                                                        }
+                                                                    }else{
+                                                                        exibirMensagemErro("Preenha o Celular");
+                                                                    }
+                                                                }else{
+                                                                    exibirMensagemErro("Preencha o valor Minimo");
+                                                                }
+                                                            }else{
+                                                                exibirMensagemErro("Preencha o valor Maxímo");
+                                                            }
+                                                        }else{
+                                                            exibirMensagemErro("Selecione o estado");
+                                                        }
+                                                    }else{
+                                                        exibirMensagemErro("Preencha a apresentação");
+                                                    }
+                                                }else{
+                                                    exibirMensagemErro("Selecione o modo de atender");
+                                                }
+                                            }else{
+                                                exibirMensagemErro("Selecione um o tipo de profissional");
+                                            }
+                                        }else{
+                                            exibirMensagemErro("Preencha o Número da residência");
+                                        }
+                                    }else{
+                                        exibirMensagemErro("Preencha a Endereço");
+                                    }
+                                }else{
+                                    exibirMensagemErro("Preencha o Bairro");
+                                }
+                            }else{
+                                exibirMensagemErro("Preencha a Cidade");
+                            }
+                        }else{
+                            exibirMensagemErro("Preencha o E-mail");
+                        }
+                    }else{
+                        exibirMensagemErro("Preencha o Nome Fantasia");
+                    }
+                }else{
+                    exibirMensagemErro("Preencha o Sobrenome");
+                }
+            }else{
+                exibirMensagemErro("Preencha o nome");
+            }
+        }
+        else
+        {
+            exibirMensagemErro("Selecionar uma foto");
+        }
+
+    }
+    // mensagem padrao de erro
+    private void exibirMensagemErro(String texto)
+    {
+        Toast.makeText(this, texto, Toast.LENGTH_SHORT).show();
+    }
+
 
     //click da imagem
     @Override
@@ -140,8 +312,8 @@ public class CadatrarProfissionalActivity extends AppCompatActivity implements V
         campoValorMin.setLocale(locale);
         campoValorMax.setLocale(locale);
 
-        //informado a data atual
-       // campoDataAtual.setText(DateUtils.);
+        //informando a data atual
+       campoDataAtual.setText(DateUtil.dataAtual());
 
     }
 
