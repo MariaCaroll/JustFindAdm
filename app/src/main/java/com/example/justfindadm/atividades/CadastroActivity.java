@@ -3,6 +3,7 @@ package com.example.justfindadm.atividades;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -103,7 +104,7 @@ public class CadastroActivity extends AppCompatActivity {
                                     {
                                         Toast.makeText(CadastroActivity.this, "Logado Com Sucesso!",
                                                 Toast.LENGTH_SHORT).show();
-
+                                        startActivity(new Intent(getApplicationContext(), ProfissionalActivity.class));
                                     }
                                     else
                                     {
