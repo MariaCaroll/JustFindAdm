@@ -112,7 +112,7 @@
             android:layout_marginTop="5dp"/>
 
         <Spinner
-            android:id="@+id/spnCriarCep"
+            android:id="@+id/spnCriarUF"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_edit_text"
@@ -283,9 +283,10 @@
             android:id="@+id/btnCadastrarProfissional"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Cadastrar"
             android:layout_marginTop="5dp"
-            android:theme="@style/botaoPadrao"/>
+            android:onClick="salvarProfissional"
+            android:text="Cadastrar"
+            android:theme="@style/botaoPadrao" />
 
     </LinearLayout>
 </ScrollView>
