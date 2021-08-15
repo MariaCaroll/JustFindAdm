@@ -2,7 +2,7 @@ package com.example.justfindadm.atividades;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
@@ -13,7 +13,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.text.format.DateUtils;
+import android.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -41,6 +41,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import dmax.dialog.SpotsDialog;
+
 public class CadatrarProfissionalActivity extends AppCompatActivity implements View.OnClickListener{
 
     //Componentes da Tela
@@ -59,6 +61,8 @@ public class CadatrarProfissionalActivity extends AppCompatActivity implements V
     private List<String> listaURLFotos = new ArrayList<>();
     //Chamado a classe de profissionais
     private Profissional prof;
+    //alertDialog
+    private AlertDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +77,16 @@ public class CadatrarProfissionalActivity extends AppCompatActivity implements V
     //Salvar a profissional
     private void salvarProfissional()
     {
+        /**
+         * Alerta de dialogo
+         */
+        dialog = new SpotsDialog.Builder()
+                .setContext(this)
+                .setMessage("Salvando Profissional")
+                .setCancelable(false)
+                .build();
+        dialog.show();
+
         /**
          * Salvar imagem no Storage
          */
@@ -112,8 +126,8 @@ public class CadatrarProfissionalActivity extends AppCompatActivity implements V
                     if(totalFotos == listaURLFotos.size()) {
                         prof.setFotos(listaURLFotos);
                         prof.salvar();
-                        //dialog.dismiss();
-                        //dialog.hide();
+                        dialog.dismiss();
+                        finish();
                     }
                 }
             }
@@ -145,7 +159,7 @@ public class CadatrarProfissionalActivity extends AppCompatActivity implements V
         prof.setCep(campoCep.getText().toString());
         prof.setData(campoDataAtual.getText().toString());
 
-        //facilitar para o filtro
+        //facilitar para o filtro eu acho
         String tipoProfissional = campoTipo.getSelectedItem().toString();
         prof.setTipo(tipoProfissional);
         String estado = campoEstado.getSelectedItem().toString();
