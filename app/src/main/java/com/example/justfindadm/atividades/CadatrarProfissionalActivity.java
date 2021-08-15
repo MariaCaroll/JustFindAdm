@@ -1,13 +1,20 @@
 package com.example.justfindadm.atividades;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.text.format.DateUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,14 +26,17 @@ import com.example.justfindadm.R;
 import com.example.justfindadm.helper.Permissoes;
 import com.santalu.maskara.widget.MaskEditText;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
-public class CadatrarProfissionalActivity extends AppCompatActivity {
+public class CadatrarProfissionalActivity extends AppCompatActivity implements View.OnClickListener{
 
     //Componentes da Tela
     private ImageView imgProf;
     private EditText campoNome, campoSobrenome, campoNomeFantasia, campoEmail, campoCidade, campoBairro;
-    private EditText campoLogradouro, campoComplemento, campoNumero, campoApresentacao;
+    private EditText campoLogradouro, campoComplemento, campoNumero, campoApresentacao, campoDataAtual;
     private Spinner campoTipo, campoModo, campoEstado;
     private CurrencyEditText campoValorMin, campoValorMax;
     private MaskEditText campoCelular, campoWhats, campoCep;
@@ -37,6 +47,9 @@ public class CadatrarProfissionalActivity extends AppCompatActivity {
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.CAMERA,
         };
+
+    //fotos recuperadas
+    private List<String> listaFotoRecuperada = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +71,43 @@ public class CadatrarProfissionalActivity extends AppCompatActivity {
         String celular = campoCelular.getText().toString();
         String whats = campoWhats.getText().toString();
     }
+
+    //click da imagem
+    @Override
+    public void onClick(View v) {
+        Log.d("onClick", "onClick: " + v.getId());
+        switch (v.getId()) {
+            case R.id.imgCadastro:
+                Log.d("onClick", "onClick: ");
+                escolherImage(1);
+                break;
+        }
+    }
+    //metodo para selecionar imagem
+    public void escolherImage(int requestCode)
+    {
+        Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(i, requestCode);
+    }
+
+    //gerar o caminho da imagem
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == Activity.RESULT_OK)
+        {
+            //recupera a imagem
+            Uri imagemSelecionada = data.getData();
+            String caminhoImagem = imagemSelecionada.toString();
+
+            //configura a imagem no ImageView
+            if(requestCode == 1) {
+                imgProf.setImageURI(imagemSelecionada);
+            }
+            listaFotoRecuperada.add(caminhoImagem);
+        }
+    }
+
     private void inicializar()
     {
         //identifica os camponentes da tela
@@ -79,12 +129,19 @@ public class CadatrarProfissionalActivity extends AppCompatActivity {
         campoCelular = findViewById(R.id.edtCriarCelular);
         campoWhats = findViewById(R.id.edtCriarWhats);
         campoCep = findViewById(R.id.edtCriarCep);
+        campoDataAtual = findViewById(R.id.edtDate);
         btnCadastrar = findViewById(R.id.btnCadastrarProfissional);
+
+        //setando a imagem
+        imgProf.setOnClickListener(this);
 
         //Mascara da Moeda RS
         Locale locale = new Locale("pt", "BR");
         campoValorMin.setLocale(locale);
         campoValorMax.setLocale(locale);
+
+        //informado a data atual
+       // campoDataAtual.setText(DateUtils.);
 
     }
 
