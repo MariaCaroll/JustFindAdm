@@ -41,7 +41,7 @@ public class CadastroActivity extends AppCompatActivity {
 
         autenticacao = ConfigurarFirebase.getFirebaseAutenticacao();
         //botao entrar que funionava
-        /*btAcessar.setOnClickListener(new View.OnClickListener() {
+        btAcessar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String email = campoEmail.getText().toString();
@@ -130,7 +130,7 @@ public class CadastroActivity extends AppCompatActivity {
                             Toast.LENGTH_SHORT).show();
                 }
             }
-        }); */
+        });
 
         //nova formula mais eficaz
 
@@ -143,14 +143,15 @@ public class CadastroActivity extends AppCompatActivity {
         tipoAcesso = findViewById(R.id.switchAcesso);
         btAcessar = findViewById(R.id.btnAcesso);
 
-        btAcessar.setOnClickListener(new View.OnClickListener() {
+        /*btAcessar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 autenticarDados();
             }
-        });
+        });*/
     }
-    public void autenticarDados() {
+
+    /*public void autenticarDados() {
 
         String textoEmail = campoEmail.getText().toString().trim();
         String textoSenha = campoSenha.getText().toString().trim();
@@ -207,5 +208,5 @@ public class CadastroActivity extends AppCompatActivity {
             }
         });
 
-    }
+    }*/
 }

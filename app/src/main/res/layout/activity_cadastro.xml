@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:layout_margin="16dp"
     android:gravity="center"
+    android:background="@drawable/gradiente_bk"
     android:orientation="vertical"
     tools:context=".atividades.CadastroActivity" >
 

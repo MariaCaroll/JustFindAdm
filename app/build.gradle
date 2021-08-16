@@ -37,19 +37,18 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
-
     // dependencias firebase
     implementation platform('com.google.firebase:firebase-bom:28.3.1')
     implementation 'com.google.firebase:firebase-database:20.0.0'
     implementation 'com.google.firebase:firebase-storage:20.0.0'
     implementation 'com.google.firebase:firebase-auth:21.0.1'
-
     // Masacaras
     implementation 'com.github.santalu:maskara:1.0.0'
     implementation 'com.github.BlacKCaT27:CurrencyEditText:2.0.2'
-
     //caixa de dialogo de progresso
     implementation 'com.github.d-max:spots-dialog:1.1@aar'
+    //imagem
+    implementation 'com.squareup.picasso:picasso:2.71828'
 
 }
 

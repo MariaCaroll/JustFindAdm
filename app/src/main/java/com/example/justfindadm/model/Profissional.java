@@ -39,8 +39,7 @@ public class Profissional {
     }
     public void salvar(){
 
-        FirebaseAuth autenticacao = ConfigurarFirebase.getFirebaseAutenticacao();
-        String idUsuario = Base64Custom.codificarBase64(autenticacao.getCurrentUser().getEmail());
+        String idUsuario = ConfigurarFirebase.getIdUsuario();
         DatabaseReference firebase = ConfigurarFirebase.getFirebase();
         firebase.child("profissionais")
                 .child(idUsuario)
