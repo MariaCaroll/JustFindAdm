@@ -30,7 +30,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class ListarProfissionalActivity extends AppCompatActivity {
-    private List<Profissional> prof = new ArrayList<>();
+    private List<Profissional> lista = new ArrayList<>();
     private RecyclerView recyclerProf;
     private AdapterProfissional adapterProfissional;
     private DatabaseReference profUsuarioRef;
@@ -63,7 +63,7 @@ public class ListarProfissionalActivity extends AppCompatActivity {
         //Configurando o recyclerView
         recyclerProf.setLayoutManager(new LinearLayoutManager(this));
         recyclerProf.setHasFixedSize(true);
-        adapterProfissional = new AdapterProfissional(prof, this);
+        adapterProfissional = new AdapterProfissional(lista , this);
         recyclerProf.setAdapter(adapterProfissional);
 
         //recupera as profissionais
@@ -75,12 +75,12 @@ public class ListarProfissionalActivity extends AppCompatActivity {
         profUsuarioRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                prof.clear();
+                lista .clear();
                 for(DataSnapshot ds : snapshot.getChildren()){
-                    prof.add(ds.getValue(Profissional.class));
+                    lista.add(ds.getValue(Profissional.class));
 
                 }
-                Collections.reverse(prof);
+                Collections.reverse(lista );
                 adapterProfissional.notifyDataSetChanged();
             }
 

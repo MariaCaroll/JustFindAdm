@@ -40,19 +40,32 @@ public class Profissional {
     public void salvar(){
 
         String idUsuario = ConfigurarFirebase.getIdUsuario();
-        DatabaseReference firebase = ConfigurarFirebase.getFirebase();
+        DatabaseReference profRef = ConfigurarFirebase.getFirebase()
+                .child("profissionais");
+        profRef.child(idUsuario)
+                .child(tipo)
+                .setValue(this);
+
+      /*  DatabaseReference firebase = ConfigurarFirebase.getFirebase();
         firebase.child("profissionais")
                 .child(idUsuario)
                 .child(tipo)
                 .push()
                 .setValue(this);
-        salvarProfPublico();
+        salvarProfPublico();*/
     }
     public void salvarProfPublico(){
+        DatabaseReference profRef = ConfigurarFirebase.getFirebase()
+                .child("profissionais_publico");
 
-        FirebaseAuth autenticacao = ConfigurarFirebase.getFirebaseAutenticacao();
+         profRef.child(getEstado())
+                .child(getCidade())
+                .child(getTipo())
+                .child(getModo())
+                .child(getIdProfissional())
+                .setValue(this);
 
-        DatabaseReference firebase = ConfigurarFirebase.getFirebase();
+        /*DatabaseReference firebase = ConfigurarFirebase.getFirebase();
         firebase.child("profissionais_publico")
                 .child(getEstado())
                 .child(getCidade())
@@ -60,7 +73,7 @@ public class Profissional {
                 .child(getModo())
                 .child(getIdProfissional())
                 .push()
-                .setValue(this);
+                .setValue(this);*/
     }
 
     public String getIdProfissional() {
